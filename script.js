@@ -170,9 +170,6 @@ function searchFilm(e) {
     for (var i = 0; i < news.length; i++) {
       news[i].style.display = "none";
     }
-    for (var i = 0; i < genres.length; i++) {
-      genres[i].style.display = "none";
-    }
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].style.display = "none";
     }
@@ -189,9 +186,6 @@ function searchFilm(e) {
   else {
     for (var i = 0; i < news.length; i++) {
       news[i].style.display = "block";
-    }
-    for (var i = 0; i < genres.length; i++) {
-      genres[i].style.display = "block";
     }
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].style.display = "block";

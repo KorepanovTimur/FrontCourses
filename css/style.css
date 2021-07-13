@@ -7,7 +7,9 @@ body{
 .tvscroll {
     overflow-x: hidden;
     overflow-y: auto;
+    height: 696px;
   }
+
 
 img {
     border-radius: 3%;

@@ -21,6 +21,8 @@ let passReg = null;
 
 let inputSearch = null;
 
+let logged = null;
+let saved = null;
 
 function login() {
   localStorage.setItem("login", "admin");
@@ -49,7 +51,15 @@ function login() {
     alert("Неверный логин или пароль");
   }
 }
-
+function SaveInput(){
+  saved = localStorage.getItem("SavedLogin");
+  if (saved !== null){
+    inputLogin = document.getElementById("inputLogin");
+    inputPass = document.getElementById("inputPass");
+    inputLogin.value = saved;
+    inputPass.value = localStorage.getItem("SavedPass");
+  }
+}
 function loginChange(userName) {
   enter = document.getElementById("notLogged");
   exit = document.getElementById("onlyLogged");
@@ -66,8 +76,6 @@ function exitLog() {
   exit = document.getElementById("onlyLogged");
   exitButton = document.getElementById("onlyLogged2");
   localStorage.setItem("islogged",null)
-  localStorage.setItem("SavedLogin",null)
-  localStorage.setItem("SavedPass",null)
   enter.style.display = "block";
   exit.style.display = "none";
   exitButton.style.display = "none";
@@ -201,12 +209,12 @@ function searchFilm(e) {
 window.onload = function () {
   inputSearch = document.getElementById("searchfilm");
   inputSearch.addEventListener('input', searchFilm);
-  logeed = localStorage.getItem("islogged");
+  logged = localStorage.getItem("islogged");
   saved = localStorage.getItem("SavedLogin");
   if (saved !== null){
     loginChange(saved);
   }
-  else if (logeed !== null) {
-    loginChange(logeed);
+  else if (logged !== null) {
+    loginChange();
   }
 }

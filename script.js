@@ -9,6 +9,7 @@ let movieButton = null;
 
 let inputLogin = null;
 let inputPass = null;
+let inputCheck = null;
 
 let enter = null;
 let exit = null;
@@ -36,6 +37,12 @@ function login() {
   
 
   if (login == loginReg && pass == passReg) {
+    inputCheck = document.getElementById("check");
+    let Check = inputCheck.value;
+    if (Check){
+      localStorage.setItem("SavedLogin",login)
+      localStorage.setItem("SavedPass",pass)
+    }
     loginChange(loginReg);
   }
   else {
@@ -49,7 +56,6 @@ function loginChange(userName) {
   exitButton = document.getElementById("onlyLogged2");
   localStorage.setItem("islogged",userName)
   hello = document.getElementById("helloWorld").textContent += userName;
-
   enter.style.display = "none";
   exit.style.display = "block";
   exitButton.style.display = "block";
@@ -60,6 +66,8 @@ function exitLog() {
   exit = document.getElementById("onlyLogged");
   exitButton = document.getElementById("onlyLogged2");
   localStorage.setItem("islogged",null)
+  localStorage.setItem("SavedLogin",null)
+  localStorage.setItem("SavedPass",null)
   enter.style.display = "block";
   exit.style.display = "none";
   exitButton.style.display = "none";
@@ -156,8 +164,6 @@ function delFade(x) {
 function searchFilm(e) {
   let elems = document.getElementsByClassName("block");
   let news = document.getElementsByClassName("ultorow");
-  let genres = document.getElementsByClassName("genre");
-  let tabs = document.getElementsByClassName("maintab");
 
   let searching = e.target.value;
   var arr = [];
@@ -170,9 +176,7 @@ function searchFilm(e) {
     for (var i = 0; i < news.length; i++) {
       news[i].style.display = "none";
     }
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].style.display = "none";
-    }
+
 
     for (var i = 0; i < arr.length; i++) {
       if (!arr[i].textContent.toUpperCase().includes(searching.toUpperCase())) {
@@ -187,9 +191,6 @@ function searchFilm(e) {
     for (var i = 0; i < news.length; i++) {
       news[i].style.display = "block";
     }
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].style.display = "block";
-    }
 
     for (var i = 0; i < arr.length; i++) {
       elems[i].style.display = "block";
@@ -201,7 +202,11 @@ window.onload = function () {
   inputSearch = document.getElementById("searchfilm");
   inputSearch.addEventListener('input', searchFilm);
   logeed = localStorage.getItem("islogged");
-  if (logeed !== null) {
+  saved = localStorage.getItem("SavedLogin");
+  if (saved !== null){
+    loginChange(saved);
+  }
+  else if (logeed !== null) {
     loginChange(logeed);
   }
 }
